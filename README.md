@@ -1,2 +1,2 @@
 # MEAN-Yelp-Uber
-A MEAN application that integrate Yelp and Uber
+A MEAN application that integrates Yelp and Uber
