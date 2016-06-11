@@ -1,0 +1,31 @@
+<div class="textwidget margin-top-30">
+    <p> <em><strong>Favorites:</strong></em> </p>
+    Pick-up Location: <strong>{{viewModel.pickupLocation.name}}</strong><strong ng-show="viewModel.pickupLocation.name">, </strong><strong>{{viewModel.pickupLocation.address}}</strong>
+</div>
+
+<script type="text/ng-template" id="delete.html">
+    <h1>Are you sure you want to delete {{viewModel.fav_to_delete.name}}?</h1>
+    <button ng-click="viewModel.yes_delete()">Yes, Delete</button>
+    <button ng-click="viewModel.cancel()">Cancel</button>
+</script>
+
+<div class="widget">
+    <strong ng-show="!viewModel.data">Loading...</strong>
+    <strong ng-show="viewModel.data.length == 0"><br>Currently you have no favorite locations. Go to the Map and favorite away!<br><br></strong>
+    <table ng-table="viewModel.tableParams" class="table">
+        <tr ng-repeat="fav in viewModel.data">
+            <td title="'Name'" class="text-center" header-class="'text-center'">
+                {{fav.name}}</td>
+            <td title="'Address'" class="text-center" header-class="'text-center'">
+                {{fav.location.address}}</td>
+            <td title="'Remove'" class="text-center" header-class="'text-center'">
+                <button ng-click="viewModel.remove(fav)"> <i class="material-icons">delete</i></button></td>
+            <td title="'View on Map'" class="text-center" header-class="'text-center'">
+                <button ng-click="viewModel.viewOnMap(fav)"> <i class="material-icons">map</i></button></td>
+            <td title="'Request Ride'" class="text-center" header-class="'text-center'">
+                <button ng-click="viewModel.requestUberRide(fav)"> <i class="material-icons">local_taxi</i></button></td>
+            <td title="'Set as My Location'" class="text-center" header-class="'text-center'">
+                <button ng-click="viewModel.setPickUpLocation(fav)"> <i class="material-icons">my_location</i></button></td>
+        </tr>
+    </table>
+</div>

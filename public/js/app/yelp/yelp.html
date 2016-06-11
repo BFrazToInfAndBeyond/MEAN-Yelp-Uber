@@ -1,0 +1,43 @@
+<script type="text/ng-template" id="yelpLocation.html">
+    <h1 ng-bind="viewModel.activeYelpLocation.name"></h1>
+    <div class="form-group">
+        <label for="yelpLocationName">Location Name</label>
+        <input type="text" name="yelpLocationName" id="yelpLocationName" ng-model="viewModel.activeYelpLocation.name" required />
+    </div>
+    <button ng-click="viewModel.favoritize()">Favorite</button>
+    <button ng-click="viewModel.cancel()">Cancel</button>
+</script>
+
+<div class="textwidget margin-top-30">
+    <p>No matter where you are, find a satisfactory meal, taxi cab, or shopping center. Our fast and friendly service brings you the best of many platforms.</p>
+    <form name="searchYelp" ng-submit="viewModel.searchYelp()">
+        <input type="search" required="" ng-model="viewModel.term" name="Search here" />
+        <input type="submit" value="Search" />
+    </form>
+    Pick-up Location: <strong>{{viewModel.pickupLocation.name}}</strong><strong ng-show="viewModel.pickupLocation.name">, </strong><strong>{{viewModel.pickupLocation.address}}</strong>
+    <br>Desired Location / Origin for Search: <strong>{{viewModel.desiredDestination.name}}</strong><strong ng-show="viewModel.desiredDestination.name">, </strong><strong>{{viewModel.desiredDestination.address}}</strong>
+</div>
+
+<div class="widget">
+    <strong ng-show="viewModel.responses.length < viewModel.bounds">Loading...</strong>
+    <table ng-show="viewModel.responses.length >= viewModel.bounds" ng-table="viewModel.tableParams" class="table">
+        <tr ng-repeat="merchant in viewModel.data.businesses | limitTo:10">
+            <td title="">
+                <img src="{{merchant.image_url}}" alt="{{merchant.name}}"></td>
+            <td title="'Name'" class="text-center" header-class="'text-center'">
+                <strong class="link" ng-bind="merchant.name" ng-click="viewModel.goToYelpSite(merchant.mobile_url)"></strong></td>
+            <td title="'Rating'" class="text-center" header-class="'text-center'">
+                {{merchant.rating}}</td>
+            <td title="'Distance from Origin'" class="text-center" header-class="'text-center'">
+                {{merchant.distanceFromOrigin}}</td>
+            <td title="'ETA from Origin'" class="text-center" header-class="'text-center'">
+                {{merchant.eta}}</td>
+            <td title="">
+                <button ng-click="viewModel.favoriteLocation(merchant)"> <i class="material-icons">star</i></button></td>
+            <td title="">
+                <button ng-click="viewModel.viewOnMap(merchant)"> <i class="material-icons">map</i></button></td>
+            <td title="">
+                <button ng-click="viewModel.requestUberRide(merchant)"><i class="material-icons">local_taxi</i></button></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+<div class="textwidget margin-top-30">
+    <p>No matter where you are, find a satisfactory meal, taxi cab, or shopping center. Our fast and friendly service brings you the best of many platforms.</p>
+    <p>Simply create an account to get started, select a highly rated venue, and we'll get you there - within an hour, or your ride is free.</p>
+</div>
+<div class="widget">
+    <form name="login-form" id="login-form" method="post" action="/users/login">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+            <label for="rememberMe">Remember Me</label>
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="Log in" /> {{#if error}}
+            <div style="color:red;">{{error}}</div>
+            {{/if}}
+            <div class="margin-top-30">
+                or <a href="/users/create">Create an account</a>
+            </div>
+        </div>
+    </form>
+</div>

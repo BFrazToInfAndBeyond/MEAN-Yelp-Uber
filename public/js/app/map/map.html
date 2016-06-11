@@ -1,0 +1,39 @@
+<script type="text/ng-template" id="location.html">
+    <h1 ng-bind="viewModel.activeLocation.name"></h1>
+    <div class="form-group">
+        <label for="locationName">Location Name</label>
+        <input type="text" name="locationName" id="locationName" ng-model="viewModel.activeLocation.name" required />
+    </div>
+    <button ng-click="viewModel.favoritize()">Favorite</button>
+    <button ng-click="viewModel.cancel()">Cancel</button>
+</script>
+
+<script type="text/ng-template" id="locationNotFound.html">
+    <div style="overflow:hidden">
+        <h1> Location Not Found</h1> We apologize for any incovenience. Try selecting another location.<br>
+        <button ng-click="viewModel.cancel()" style="float: right; outline: none;">Proceed</button>
+    </div>
+</script>
+
+<div class="textwidget margin-top-30">
+    Pick-up Location: <strong>{{viewModel.pickupLocation.name}}</strong><strong ng-show="viewModel.pickupLocation.name">, </strong><strong>{{viewModel.pickupLocation.address}}</strong >
+    <br><br>
+  
+  <p>Desired Location: <strong>{{viewModel.desiredDestination.name}}</strong><strong ng-show="viewModel.desiredDestination.name">, </strong><strong>{{viewModel.desiredDestination.address}}</strong></p>
+
+    <input type="submit" value="Favorite" ng-show="viewModel.desiredDestination.address" ng-click="viewModel.favoriteLocation()" />
+    <input type="submit" value="View Favorites" ng-click="viewModel.showFavorites()" />
+    <input type="submit" value="View Eateries on Yelp" ng-click="viewModel.showYelp()" />
+    <input type="submit" value="Request Uber Ride" ng-click="viewModel.requestUberRide()" />
+    <input type="submit" value="Set Pick-up Location" ng-click="viewModel.setPickUpLocation()" />
+
+</div>
+<div id="map_canvas">
+    <script id="searchbox.tpl.html" type="text/ng-template">
+        <input type="text" ng-model="ngModel" placeholder="Search" size="60" required>
+    </script>
+    <ui-gmap-google-map center='viewModel.map.center' zoom='viewModel.map.zoom' draggable="true">
+        <ui-gmap-marker coords="viewModel.marker.coords" options="viewModel.marker.options" icon="viewModel.marker.icon" events="viewModel.marker.events" idkey="viewModel.marker.id"></ui-gmap-marker>
+        <ui-gmap-search-box ng-model="viewModel.searchbox.text" template="viewModel.searchbox.template" events="viewModel.searchbox.events"></ui-gmap-search-box>
+    </ui-gmap-google-map>
+</div>
